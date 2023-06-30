@@ -125,11 +125,17 @@ function App() {
     setIsDetailOpen(true)
     setInvoiceDetails(invoiceData)
   }
+  const deleteInvoiceHandler = (id) => {
+    const newInvoices = invoices.filter((invoice) => invoice.id !== id)
+    setInvoices(newInvoices)
+    setIsDetailOpen(false)
+    console.log(id)
+  }
   return (
     <div className="font-spartan bg-slate-100 h-screen">
       <Header />
       <main className="bg-slate-100 px-6">
-        {isDetailOpen && invoiceDetails && <InvoiceDetails onClick={() => setIsDetailOpen(false)} {...invoiceDetails} />}
+        {isDetailOpen && invoiceDetails && <InvoiceDetails onClick={() => setIsDetailOpen(false)} {...invoiceDetails} onDelete={deleteInvoiceHandler} />}
         {!isNewInvoiceClicked && !isDetailOpen && (
           <div className="flex items-center justify-between py-9">
             <div>
