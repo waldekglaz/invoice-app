@@ -62,12 +62,14 @@ export default function InvoiceDetails({ onClick, status, id, description, sende
           </div>
           <div className="mb-[38px]">
             <p className="mb-[13px]">Sent to</p>
-            <p className="text-black font-bold text-base mb-[7px]">{clientEmail}</p>
+            <a className="text-black font-bold text-base mb-[7px]" href={`mailto:${clientEmail}`}>
+              {clientEmail}
+            </a>
           </div>
           <div>
             <ul>
               {items.map((item) => (
-                <li>
+                <li key={item.name}>
                   <div className="bg-blue-50 p-6 flex justify-between items-center rounded-t-md">
                     <div>
                       <p className="text-black font-bold text-base mb-[7px]">{item.name}</p>

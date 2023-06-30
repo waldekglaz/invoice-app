@@ -4,6 +4,7 @@ import Message from './components/Message'
 import Form from './components/Form'
 import InvoiceCard from './components/InvoiceCard'
 import InvoiceDetails from './components/InvoiceDetails'
+import Filter from './components/Filter'
 
 const MOCK_DATA = [
   {
@@ -75,6 +76,136 @@ const MOCK_DATA = [
     total: 556.0,
   },
   {
+    id: 'RG0314',
+    createdAt: '2021-09-24',
+    paymentDue: '2021-10-01',
+    description: 'Website Redesign',
+    paymentTerms: 7,
+    clientName: 'John Morrison',
+    clientEmail: 'jm@myco.com',
+    status: 'paid',
+    senderAddress: {
+      street: '19 Union Terrace',
+      city: 'London',
+      postCode: 'E1 3EZ',
+      country: 'United Kingdom',
+    },
+    clientAddress: {
+      street: '79 Dover Road',
+      city: 'Westhall',
+      postCode: 'IP19 3PF',
+      country: 'United Kingdom',
+    },
+    items: [
+      {
+        name: 'Website Redesign',
+        quantity: 1,
+        price: 14002.33,
+        total: 14002.33,
+      },
+    ],
+    total: 14002.33,
+  },
+  {
+    id: 'RT2080',
+    createdAt: '2021-10-11',
+    paymentDue: '2021-10-12',
+    description: 'Logo Concept',
+    paymentTerms: 1,
+    clientName: 'Alysa Werner',
+    clientEmail: 'alysa@email.co.uk',
+    status: 'pending',
+    senderAddress: {
+      street: '19 Union Terrace',
+      city: 'London',
+      postCode: 'E1 3EZ',
+      country: 'United Kingdom',
+    },
+    clientAddress: {
+      street: '63 Warwick Road',
+      city: 'Carlisle',
+      postCode: 'CA20 2TG',
+      country: 'United Kingdom',
+    },
+    items: [
+      {
+        name: 'Logo Sketches',
+        quantity: 1,
+        price: 102.04,
+        total: 102.04,
+      },
+    ],
+    total: 102.04,
+  },
+  {
+    id: 'AA1449',
+    createdAt: '2021-10-7',
+    paymentDue: '2021-10-14',
+    description: 'Re-branding',
+    paymentTerms: 7,
+    clientName: 'Mellisa Clarke',
+    clientEmail: 'mellisa.clarke@example.com',
+    status: 'pending',
+    senderAddress: {
+      street: '19 Union Terrace',
+      city: 'London',
+      postCode: 'E1 3EZ',
+      country: 'United Kingdom',
+    },
+    clientAddress: {
+      street: '46 Abbey Row',
+      city: 'Cambridge',
+      postCode: 'CB5 6EG',
+      country: 'United Kingdom',
+    },
+    items: [
+      {
+        name: 'New Logo',
+        quantity: 1,
+        price: 1532.33,
+        total: 1532.33,
+      },
+      {
+        name: 'Brand Guidelines',
+        quantity: 1,
+        price: 2500.0,
+        total: 2500.0,
+      },
+    ],
+    total: 4032.33,
+  },
+  {
+    id: 'TY9141',
+    createdAt: '2021-10-01',
+    paymentDue: '2021-10-31',
+    description: 'Landing Page Design',
+    paymentTerms: 30,
+    clientName: 'Thomas Wayne',
+    clientEmail: 'thomas@dc.com',
+    status: 'pending',
+    senderAddress: {
+      street: '19 Union Terrace',
+      city: 'London',
+      postCode: 'E1 3EZ',
+      country: 'United Kingdom',
+    },
+    clientAddress: {
+      street: '3964  Queens Lane',
+      city: 'Gotham',
+      postCode: '60457',
+      country: 'United States of America',
+    },
+    items: [
+      {
+        name: 'Web Design',
+        quantity: 1,
+        price: 6155.91,
+        total: 6155.91,
+      },
+    ],
+    total: 6155.91,
+  },
+  {
     id: 'FV2353',
     createdAt: '2021-11-05',
     paymentDue: '2021-11-12',
@@ -111,6 +242,7 @@ function App() {
   const [isNewInvoiceClicked, setIsNewInvoiceClicked] = useState(false)
   const [isDetailOpen, setIsDetailOpen] = useState(false)
   const [invoiceDetails, setInvoiceDetails] = useState(null)
+  const [filter, setFilter] = useState('all')
 
   const addClickHandler = () => {
     setIsNewInvoiceClicked(true)
@@ -131,6 +263,22 @@ function App() {
     setIsDetailOpen(false)
     console.log(id)
   }
+  const onFilterChange = (e) => {
+    setFilter(e.target.value)
+  }
+  const filteredInvoices = invoices.filter((invoice) => {
+    if (filter === 'all') {
+      return true
+    } else {
+      return invoice.status === filter
+    }
+  })
+
+  const onSaveNewInvoice = (e, invoice) => {
+    e.preventDefault()
+    console.log(invoice)
+    setInvoices([...invoices, invoice])
+  }
   return (
     <div className="font-spartan bg-slate-100 h-screen">
       <Header />
@@ -142,19 +290,15 @@ function App() {
               <h2 className="text-2xl font-bold">Invoices</h2>
               {invoices.length === 0 ? <p className="text-[13px] text-slate-500 mt-[-4px]">No invoices</p> : <p className="text-[13px] text-slate-500 mt-[-4px]">{invoices.length === 1 ? '1 invoice' : `${invoices.length} invoices`}</p>}
             </div>
-            <select>
-              <option>Filter</option>
-              <option>Paid</option>
-              <option>Pending</option>
-              <option>Draft</option>
-            </select>
+
+            <Filter filter={filter} onChange={onFilterChange} />
             <div>
               <button onClick={addClickHandler}>New</button>
             </div>
           </div>
         )}
-        {invoices.length > 0 && !isNewInvoiceClicked && !isDetailOpen && invoices.map((invoice) => <InvoiceCard key={invoice.id} {...invoice} onClick={onCardClickHandler} />)}
-        {isNewInvoiceClicked && <Form onClick={backClickHandler} />}
+        {invoices.length > 0 && !isNewInvoiceClicked && !isDetailOpen && filteredInvoices.map((invoice) => <InvoiceCard key={invoice.id} {...invoice} onClick={onCardClickHandler} />)}
+        {isNewInvoiceClicked && <Form onClick={backClickHandler} onSave={onSaveNewInvoice} />}
         <div>{invoices.length === 0 && !isNewInvoiceClicked && <Message />}</div>
       </main>
     </div>
