@@ -274,8 +274,7 @@ function App() {
     }
   })
 
-  const onSaveNewInvoice = (e, invoice) => {
-    e.preventDefault()
+  const onSaveNewInvoice = (invoice) => {
     console.log(invoice)
     setInvoices([...invoices, invoice])
   }
