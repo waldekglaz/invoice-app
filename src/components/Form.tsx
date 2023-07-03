@@ -1,51 +1,63 @@
-import { MouseEventHandler, useState } from 'react'
-import GoBackBtn from './GoBackBtn'
-import InputField from './InputField'
-import { useForm } from 'react-hook-form'
-import { invoiceNumberGenerator, todayDateGenerator } from '../utils/utils'
+import { MouseEventHandler, useState } from "react";
+import GoBackBtn from "./GoBackBtn";
+import InputField from "./InputField";
+import { useForm } from "react-hook-form";
+import { invoiceNumberGenerator, todayDateGenerator } from "../utils/utils";
 interface FormProps {
-  onClick: MouseEventHandler<HTMLButtonElement>
-  onSave: any
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  onSave: any;
 }
 
 export default function Form({ onClick, onSave }: FormProps) {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = ({
+    clientEmail,
+    clientName,
+    street,
+    clientCity,
+    clientPostcode,
+    country,
+    createdAt,
+    paymentTerms,
+    description,
+  }) => {
+    const currentDate = new Date(createdAt);
+    currentDate.setDate(currentDate.getDate() + Number(paymentTerms));
     const invoiceData = {
       id: invoiceNumberGenerator(),
-      createdAt: todayDateGenerator(),
-      paymentDue: '2021-11-12',
-      description: 'Logo Re-design',
-      paymentTerms: 7,
-      clientName: 'data.clientName',
-      clientEmail: 'data.clientEmail',
-      status: 'draft',
+      createdAt: createdAt,
+      paymentDue: currentDate,
+      description,
+      paymentTerms: Number(paymentTerms),
+      clientName: clientName,
+      clientEmail: clientEmail,
+      status: "draft",
       senderAddress: {
-        street: '19 Union Terrace',
-        city: 'London',
-        postCode: 'E1 3EZ',
-        country: 'United Kingdom',
+        street: "19 Union Terrace",
+        city: "London",
+        postCode: "E1 3EZ",
+        country: "United Kingdom",
       },
       clientAddress: {
-        street: 'clientStreet',
-        city: 'clientCity',
-        postCode: 'clientPostcode',
-        country: 'United Kingdom',
+        street: street,
+        city: clientCity,
+        postCode: clientPostcode,
+        country: country,
       },
       items: [
         {
-          name: 'Logo Re-design',
+          name: "Logo Re-design",
           quantity: 1,
           price: 3102.04,
           total: 3102.04,
         },
       ],
       total: 5445,
-    }
-    // onSave(invoiceData)
-    console.log(data)
-  }
+    };
+    onSave(invoiceData);
+    console.log(createdAt);
+  };
 
   return (
     <div>
@@ -54,22 +66,77 @@ export default function Form({ onClick, onSave }: FormProps) {
       Bill From
       {/* <form onSubmit={(e) => onSave(e, invoiceData)}> */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <TextInput name="client-street" type="text" text="Street Address" value={clientStreet} onChange={onClientStreetChange} />
-        <div className="flex">
-          {' '}
-          <TextInput name="client-city" type="text" text="City" value={clientCity} onChange={onClientCityChange} />
-          <TextInput name="client-post-code" type="text" text="Post Code" value={clientPostcode} onChange={onClientPostcodeChange} />
-          <TextInput name="client-name" type="text" text="Client's Name" value={clientName} onChange={onClientNameChange} />
-          <TextInput name="client-email" type="text" text="Client's Email" value={clientEmail} onChange={onClientEmailChange} />
-        </div> */}
-        {/* <InputField text="Street Address" type="text" {...register('street')} /> */}
-        <label htmlFor="clientEmail">Client Email</label>
-        <input defaultValue="" {...register('clientEmail')} />
+        <InputField
+          name="clientName"
+          type="text"
+          register={register}
+          defaultValue=""
+          text="Client's name"
+        />
+        <InputField
+          name="clientEmail"
+          type="email"
+          register={register}
+          defaultValue=""
+          text="Client's email"
+        />
+        <InputField
+          name="street"
+          type="text"
+          register={register}
+          defaultValue=""
+          text="Street Address"
+        />
+        <InputField
+          name="clientCity"
+          type="text"
+          register={register}
+          defaultValue=""
+          text="City"
+        />
+        <InputField
+          name="clientPostcode"
+          type="text"
+          register={register}
+          defaultValue=""
+          text="City"
+        />
+        <InputField
+          name="country"
+          type="text"
+          register={register}
+          defaultValue=""
+          text="Country"
+        />
+        <InputField
+          name="createdAt"
+          type="date"
+          register={register}
+          defaultValue=""
+          text=""
+        />
+        <div>
+          <label htmlFor={"paymentTerms"}></label>
+          <select {...register("paymentTerms")}>
+            <option value="1">Net 1 day</option>
+            <option value="7">Net 7 days</option>
+            <option value="14">Net 14 days</option>
+            <option value="30">Net 30 days</option>
+          </select>
+        </div>
+        <InputField
+          name="description"
+          type="text"
+          register={register}
+          defaultValue=""
+          text="Project Description"
+        />
+        <p>Item List</p>
         <button type="submit" className="bg-blue-500">
           Save & Send
         </button>
       </form>
       Bill To
     </div>
-  )
+  );
 }

@@ -1,36 +1,36 @@
-import { useState } from 'react'
-import Header from './components/Header'
-import Message from './components/Message'
-import Form from './components/Form'
-import InvoiceCard from './components/InvoiceCard'
-import InvoiceDetails from './components/InvoiceDetails'
-import Filter from './components/Filter'
+import { useState } from "react";
+import Header from "./components/Header";
+import Message from "./components/Message";
+import Form from "./components/Form";
+import InvoiceCard from "./components/InvoiceCard";
+import InvoiceDetails from "./components/InvoiceDetails";
+import Filter from "./components/Filter";
 
 const MOCK_DATA = [
   {
-    id: 'RT3080',
-    createdAt: '2021-08-18',
-    paymentDue: '2021-08-19',
-    description: 'Re-branding',
+    id: "RT3080",
+    createdAt: "2021-08-18",
+    paymentDue: "2021-08-19",
+    description: "Re-branding",
     paymentTerms: 1,
-    clientName: 'Jensen Huang',
-    clientEmail: 'jensenh@mail.com',
-    status: 'paid',
+    clientName: "Jensen Huang",
+    clientEmail: "jensenh@mail.com",
+    status: "paid",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '106 Kendell Street',
-      city: 'Sharrington',
-      postCode: 'NR24 5WQ',
-      country: 'United Kingdom',
+      street: "106 Kendell Street",
+      city: "Sharrington",
+      postCode: "NR24 5WQ",
+      country: "United Kingdom",
     },
     items: [
       {
-        name: 'Brand Guidelines',
+        name: "Brand Guidelines",
         quantity: 1,
         price: 1800.9,
         total: 1800.9,
@@ -39,35 +39,35 @@ const MOCK_DATA = [
     total: 1800.9,
   },
   {
-    id: 'XM9141',
-    createdAt: '2021-08-21',
-    paymentDue: '2021-09-20',
-    description: 'Graphic Design',
+    id: "XM9141",
+    createdAt: "2021-08-21",
+    paymentDue: "2021-09-20",
+    description: "Graphic Design",
     paymentTerms: 30,
-    clientName: 'Alex Grim',
-    clientEmail: 'alexgrim@mail.com',
-    status: 'pending',
+    clientName: "Alex Grim",
+    clientEmail: "alexgrim@mail.com",
+    status: "pending",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '84 Church Way',
-      city: 'Bradford',
-      postCode: 'BD1 9PB',
-      country: 'United Kingdom',
+      street: "84 Church Way",
+      city: "Bradford",
+      postCode: "BD1 9PB",
+      country: "United Kingdom",
     },
     items: [
       {
-        name: 'Banner Design',
+        name: "Banner Design",
         quantity: 1,
         price: 156.0,
         total: 156.0,
       },
       {
-        name: 'Email Design',
+        name: "Email Design",
         quantity: 2,
         price: 200.0,
         total: 400.0,
@@ -76,29 +76,29 @@ const MOCK_DATA = [
     total: 556.0,
   },
   {
-    id: 'RG0314',
-    createdAt: '2021-09-24',
-    paymentDue: '2021-10-01',
-    description: 'Website Redesign',
+    id: "RG0314",
+    createdAt: "2021-09-24",
+    paymentDue: "2021-10-01",
+    description: "Website Redesign",
     paymentTerms: 7,
-    clientName: 'John Morrison',
-    clientEmail: 'jm@myco.com',
-    status: 'paid',
+    clientName: "John Morrison",
+    clientEmail: "jm@myco.com",
+    status: "paid",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '79 Dover Road',
-      city: 'Westhall',
-      postCode: 'IP19 3PF',
-      country: 'United Kingdom',
+      street: "79 Dover Road",
+      city: "Westhall",
+      postCode: "IP19 3PF",
+      country: "United Kingdom",
     },
     items: [
       {
-        name: 'Website Redesign',
+        name: "Website Redesign",
         quantity: 1,
         price: 14002.33,
         total: 14002.33,
@@ -107,29 +107,29 @@ const MOCK_DATA = [
     total: 14002.33,
   },
   {
-    id: 'RT2080',
-    createdAt: '2021-10-11',
-    paymentDue: '2021-10-12',
-    description: 'Logo Concept',
+    id: "RT2080",
+    createdAt: "2021-10-11",
+    paymentDue: "2021-10-12",
+    description: "Logo Concept",
     paymentTerms: 1,
-    clientName: 'Alysa Werner',
-    clientEmail: 'alysa@email.co.uk',
-    status: 'pending',
+    clientName: "Alysa Werner",
+    clientEmail: "alysa@email.co.uk",
+    status: "pending",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '63 Warwick Road',
-      city: 'Carlisle',
-      postCode: 'CA20 2TG',
-      country: 'United Kingdom',
+      street: "63 Warwick Road",
+      city: "Carlisle",
+      postCode: "CA20 2TG",
+      country: "United Kingdom",
     },
     items: [
       {
-        name: 'Logo Sketches',
+        name: "Logo Sketches",
         quantity: 1,
         price: 102.04,
         total: 102.04,
@@ -138,35 +138,35 @@ const MOCK_DATA = [
     total: 102.04,
   },
   {
-    id: 'AA1449',
-    createdAt: '2021-10-7',
-    paymentDue: '2021-10-14',
-    description: 'Re-branding',
+    id: "AA1449",
+    createdAt: "2021-10-7",
+    paymentDue: "2021-10-14",
+    description: "Re-branding",
     paymentTerms: 7,
-    clientName: 'Mellisa Clarke',
-    clientEmail: 'mellisa.clarke@example.com',
-    status: 'pending',
+    clientName: "Mellisa Clarke",
+    clientEmail: "mellisa.clarke@example.com",
+    status: "pending",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '46 Abbey Row',
-      city: 'Cambridge',
-      postCode: 'CB5 6EG',
-      country: 'United Kingdom',
+      street: "46 Abbey Row",
+      city: "Cambridge",
+      postCode: "CB5 6EG",
+      country: "United Kingdom",
     },
     items: [
       {
-        name: 'New Logo',
+        name: "New Logo",
         quantity: 1,
         price: 1532.33,
         total: 1532.33,
       },
       {
-        name: 'Brand Guidelines',
+        name: "Brand Guidelines",
         quantity: 1,
         price: 2500.0,
         total: 2500.0,
@@ -175,29 +175,29 @@ const MOCK_DATA = [
     total: 4032.33,
   },
   {
-    id: 'TY9141',
-    createdAt: '2021-10-01',
-    paymentDue: '2021-10-31',
-    description: 'Landing Page Design',
+    id: "TY9141",
+    createdAt: "2021-10-01",
+    paymentDue: "2021-10-31",
+    description: "Landing Page Design",
     paymentTerms: 30,
-    clientName: 'Thomas Wayne',
-    clientEmail: 'thomas@dc.com',
-    status: 'pending',
+    clientName: "Thomas Wayne",
+    clientEmail: "thomas@dc.com",
+    status: "pending",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '3964  Queens Lane',
-      city: 'Gotham',
-      postCode: '60457',
-      country: 'United States of America',
+      street: "3964  Queens Lane",
+      city: "Gotham",
+      postCode: "60457",
+      country: "United States of America",
     },
     items: [
       {
-        name: 'Web Design',
+        name: "Web Design",
         quantity: 1,
         price: 6155.91,
         total: 6155.91,
@@ -206,29 +206,29 @@ const MOCK_DATA = [
     total: 6155.91,
   },
   {
-    id: 'FV2353',
-    createdAt: '2021-11-05',
-    paymentDue: '2021-11-12',
-    description: 'Logo Re-design',
+    id: "FV2353",
+    createdAt: "2021-11-05",
+    paymentDue: "2021-11-12",
+    description: "Logo Re-design",
     paymentTerms: 7,
-    clientName: 'Anita Wainwright',
-    clientEmail: '',
-    status: 'draft',
+    clientName: "Anita Wainwright",
+    clientEmail: "",
+    status: "draft",
     senderAddress: {
-      street: '19 Union Terrace',
-      city: 'London',
-      postCode: 'E1 3EZ',
-      country: 'United Kingdom',
+      street: "19 Union Terrace",
+      city: "London",
+      postCode: "E1 3EZ",
+      country: "United Kingdom",
     },
     clientAddress: {
-      street: '',
-      city: '',
-      postCode: '',
-      country: '',
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
     },
     items: [
       {
-        name: 'Logo Re-design',
+        name: "Logo Re-design",
         quantity: 1,
         price: 3102.04,
         total: 3102.04,
@@ -236,58 +236,77 @@ const MOCK_DATA = [
     ],
     total: 3102.04,
   },
-]
+];
 function App() {
-  const [invoices, setInvoices] = useState(MOCK_DATA)
-  const [isNewInvoiceClicked, setIsNewInvoiceClicked] = useState(false)
-  const [isDetailOpen, setIsDetailOpen] = useState(false)
-  const [invoiceDetails, setInvoiceDetails] = useState(null)
-  const [filter, setFilter] = useState('all')
+  const [invoices, setInvoices] = useState(MOCK_DATA);
+  const [isNewInvoiceClicked, setIsNewInvoiceClicked] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [invoiceDetails, setInvoiceDetails] = useState(null);
+  const [filter, setFilter] = useState("all");
 
   const addClickHandler = () => {
-    setIsNewInvoiceClicked(true)
-  }
+    setIsNewInvoiceClicked(true);
+  };
   const backClickHandler = () => {
-    setIsNewInvoiceClicked(false)
-  }
+    setIsNewInvoiceClicked(false);
+  };
   const onCardClickHandler = (e) => {
-    console.log(e.target.textContent)
-    const invoiceData = invoices.find((invoice) => invoice.id === e.target.textContent)
-    console.log(invoiceData)
-    setIsDetailOpen(true)
-    setInvoiceDetails(invoiceData)
-  }
+    console.log(e.target.textContent);
+    const invoiceData = invoices.find(
+      (invoice) => invoice.id === e.target.textContent
+    );
+    console.log(invoiceData);
+    setIsDetailOpen(true);
+    setInvoiceDetails(invoiceData);
+  };
   const deleteInvoiceHandler = (id) => {
-    const newInvoices = invoices.filter((invoice) => invoice.id !== id)
-    setInvoices(newInvoices)
-    setIsDetailOpen(false)
-    console.log(id)
-  }
+    const newInvoices = invoices.filter((invoice) => invoice.id !== id);
+    setInvoices(newInvoices);
+    setIsDetailOpen(false);
+    console.log(id);
+  };
   const onFilterChange = (e) => {
-    setFilter(e.target.value)
-  }
+    setFilter(e.target.value);
+  };
   const filteredInvoices = invoices.filter((invoice) => {
-    if (filter === 'all') {
-      return true
+    if (filter === "all") {
+      return true;
     } else {
-      return invoice.status === filter
+      return invoice.status === filter;
     }
-  })
+  });
 
   const onSaveNewInvoice = (invoice) => {
-    console.log(invoice)
-    setInvoices([...invoices, invoice])
-  }
+    console.log(invoice);
+    setInvoices([invoice, ...invoices]);
+    setIsNewInvoiceClicked(false);
+  };
   return (
     <div className="font-spartan bg-slate-100 h-screen">
       <Header />
       <main className="bg-slate-100 px-6">
-        {isDetailOpen && invoiceDetails && <InvoiceDetails onClick={() => setIsDetailOpen(false)} {...invoiceDetails} onDelete={deleteInvoiceHandler} />}
+        {isDetailOpen && invoiceDetails && (
+          <InvoiceDetails
+            onClick={() => setIsDetailOpen(false)}
+            {...invoiceDetails}
+            onDelete={deleteInvoiceHandler}
+          />
+        )}
         {!isNewInvoiceClicked && !isDetailOpen && (
           <div className="flex items-center justify-between py-9">
             <div>
               <h2 className="text-2xl font-bold">Invoices</h2>
-              {invoices.length === 0 ? <p className="text-[13px] text-slate-500 mt-[-4px]">No invoices</p> : <p className="text-[13px] text-slate-500 mt-[-4px]">{invoices.length === 1 ? '1 invoice' : `${invoices.length} invoices`}</p>}
+              {invoices.length === 0 ? (
+                <p className="text-[13px] text-slate-500 mt-[-4px]">
+                  No invoices
+                </p>
+              ) : (
+                <p className="text-[13px] text-slate-500 mt-[-4px]">
+                  {invoices.length === 1
+                    ? "1 invoice"
+                    : `${invoices.length} invoices`}
+                </p>
+              )}
             </div>
 
             <Filter filter={filter} onChange={onFilterChange} />
@@ -296,12 +315,25 @@ function App() {
             </div>
           </div>
         )}
-        {invoices.length > 0 && !isNewInvoiceClicked && !isDetailOpen && filteredInvoices.map((invoice) => <InvoiceCard key={invoice.id} {...invoice} onClick={onCardClickHandler} />)}
-        {isNewInvoiceClicked && <Form onClick={backClickHandler} onSave={onSaveNewInvoice} />}
-        <div>{invoices.length === 0 && !isNewInvoiceClicked && <Message />}</div>
+        {invoices.length > 0 &&
+          !isNewInvoiceClicked &&
+          !isDetailOpen &&
+          filteredInvoices.map((invoice) => (
+            <InvoiceCard
+              key={invoice.id}
+              {...invoice}
+              onClick={onCardClickHandler}
+            />
+          ))}
+        {isNewInvoiceClicked && (
+          <Form onClick={backClickHandler} onSave={onSaveNewInvoice} />
+        )}
+        <div>
+          {invoices.length === 0 && !isNewInvoiceClicked && <Message />}
+        </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
