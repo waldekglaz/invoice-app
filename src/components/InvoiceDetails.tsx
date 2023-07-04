@@ -1,17 +1,31 @@
-import React from 'react'
-import GoBackBtn from './GoBackBtn'
-import Card from './Card'
-import StatusDisplay from './StatusDisplay'
-import { dateGenerator } from '../utils/utils'
-import ActionBtn from './ActionBtn'
+import React from "react";
+import GoBackBtn from "./GoBackBtn";
+import Card from "./Card";
+import StatusDisplay from "./StatusDisplay";
+import { dateGenerator } from "../utils/utils";
+import ActionBtn from "./ActionBtn";
 
 interface InvoiceDetailsProps {
-  status: string
-  id: string
-  description: string
+  status: string;
+  id: string;
+  description: string;
 }
 
-export default function InvoiceDetails({ onClick, status, id, description, senderAddress, createdAt, paymentDue, clientName, clientEmail, items, total, clientAddress, onDelete }: InvoiceDetailsProps) {
+export default function InvoiceDetails({
+  onClick,
+  status,
+  id,
+  description,
+  senderAddress,
+  createdAt,
+  paymentDue,
+  clientName,
+  clientEmail,
+  items,
+  total,
+  clientAddress,
+  onDelete,
+}: InvoiceDetailsProps) {
   return (
     <>
       <div className="px-6 py-[33px]">
@@ -39,16 +53,22 @@ export default function InvoiceDetails({ onClick, status, id, description, sende
             <div className="mr-[62px]">
               <div className="mb-[31px]">
                 <p className="mb-3">Invoice Date</p>
-                <p className="text-black font-bold text-base">{dateGenerator(createdAt)}</p>
+                <p className="text-black font-bold text-base">
+                  {dateGenerator(createdAt)}
+                </p>
               </div>
               <div>
                 <p className="mb-3">Payment Due</p>
-                <p className="text-black font-bold text-base">{dateGenerator(paymentDue)}</p>
+                <p className="text-black font-bold text-base">
+                  {dateGenerator(paymentDue)}
+                </p>
               </div>
             </div>
             <div>
               <p className="mb-3">Bill To</p>
-              <h2 className="text-black font-bold text-base mb-[7px]">{clientName}</h2>
+              <h2 className="text-black font-bold text-base mb-[7px]">
+                {clientName}
+              </h2>
               <address className="not-italic mb-8">
                 {clientAddress.street}
                 <br />
@@ -62,7 +82,10 @@ export default function InvoiceDetails({ onClick, status, id, description, sende
           </div>
           <div className="mb-[38px]">
             <p className="mb-[13px]">Sent to</p>
-            <a className="text-black font-bold text-base mb-[7px]" href={`mailto:${clientEmail}`}>
+            <a
+              className="text-black font-bold text-base mb-[7px]"
+              href={`mailto:${clientEmail}`}
+            >
               {clientEmail}
             </a>
           </div>
@@ -71,19 +94,26 @@ export default function InvoiceDetails({ onClick, status, id, description, sende
               {items.map((item) => (
                 <li key={item.name}>
                   <div className="bg-blue-50 p-6 flex justify-between items-center rounded-t-md">
-                    <div>
-                      <p className="text-black font-bold text-base mb-[7px]">{item.name}</p>
-                      <p>
-                        {item.quantity} x {item.price}
+                    <div className="flex justify-between items-center w-full">
+                      <div>
+                        <p className="text-black font-bold text-base mb-[7px]">
+                          {item.name}
+                        </p>
+                        <p>
+                          {item.quantity} x {item.price}
+                        </p>
+                      </div>
+                      <p className="text-black font-bold text-base">
+                        {" "}
+                        £ {item.quantity * item.price}
                       </p>
                     </div>
-                    <p className="text-black font-bold text-base mb-[7px]">{item.total}</p>
                   </div>
                 </li>
               ))}
             </ul>
             <div className="flex justify-between items-center px-6 py-8 bg-slate-700 text-white rounded-b-md">
-              Grand Total <span className="text-2xl">{total}</span>
+              Grand Total <span className="text-2xl">£ {total}</span>
             </div>
           </div>
         </Card>
@@ -94,5 +124,5 @@ export default function InvoiceDetails({ onClick, status, id, description, sende
         <ActionBtn btnText="mark as paid" />
       </div>
     </>
-  )
+  );
 }
