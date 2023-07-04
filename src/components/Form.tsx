@@ -3,6 +3,7 @@ import GoBackBtn from "./GoBackBtn";
 import InputField from "./InputField";
 import { useForm } from "react-hook-form";
 import { invoiceNumberGenerator, todayDateGenerator } from "../utils/utils";
+import trash from "../assets/icon-delete.svg";
 interface FormProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
   onSave: any;
@@ -80,8 +81,6 @@ export default function Form({ onClick, onSave }: FormProps) {
     <div>
       <GoBackBtn onClick={onClick} />
       <h2>New invoice</h2>
-      Bill From
-      {/* <form onSubmit={(e) => onSave(e, invoiceData)}> */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
           name="clientName"
@@ -104,20 +103,23 @@ export default function Form({ onClick, onSave }: FormProps) {
           defaultValue=""
           text="Street Address"
         />
-        <InputField
-          name="clientCity"
-          type="text"
-          register={register}
-          defaultValue=""
-          text="City"
-        />
-        <InputField
-          name="clientPostcode"
-          type="text"
-          register={register}
-          defaultValue=""
-          text="City"
-        />
+        <div className="flex justify-between gap-6">
+          <InputField
+            name="clientCity"
+            type="text"
+            register={register}
+            defaultValue=""
+            text="City"
+          />
+          <InputField
+            name="clientPostcode"
+            type="text"
+            register={register}
+            defaultValue=""
+            text="Post Code"
+          />
+        </div>
+
         <InputField
           name="country"
           type="text"
@@ -173,7 +175,7 @@ export default function Form({ onClick, onSave }: FormProps) {
               onChange={(e) => handleChange(e, i)}
             />
             <button type="button" onClick={() => handleDelete(i)}>
-              Delete
+              <img src={trash} alt="remove icon" />
             </button>
           </div>
         ))}

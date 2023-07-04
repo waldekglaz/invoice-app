@@ -8,8 +8,10 @@ export default function InputField({
   defaultValue,
 }) {
   return (
-    <div>
-      <label htmlFor={name}>{text}</label>
+    <div className="flex flex-col mb-6">
+      <label className="mb-[9px]" htmlFor={name}>
+        {text}
+      </label>
       <input type={type} defaultValue={defaultValue} {...register(name)} />
     </div>
   );
