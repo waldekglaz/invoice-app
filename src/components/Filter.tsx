@@ -1,12 +1,20 @@
-import React from 'react'
-
-export default function Filter({ filter, onChange }) {
+interface FilterProps {
+  filter: string;
+  onChange: Function;
+}
+import { filterOptions } from "../constants";
+export default function Filter({ filter, onChange }: FilterProps) {
   return (
-    <select className="p-1 bg-slate-100" value={filter} onChange={onChange}>
-      <option value="all">All</option>
-      <option value="paid">Paid</option>
-      <option value="pending">Pending</option>
-      <option value="draft">Draft</option>
+    <select
+      className="px-4 py-2 bg-slate-100 capitalize"
+      value={filter}
+      onChange={onChange}
+    >
+      {filterOptions.map((option, index) => (
+        <option key={`${option}-${index}`} value={option}>
+          {option}
+        </option>
+      ))}
     </select>
-  )
+  );
 }
