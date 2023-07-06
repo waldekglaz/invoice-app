@@ -252,7 +252,6 @@ function App() {
     setIsNewInvoiceClicked(false);
   };
   const onCardClickHandler = (e) => {
-    console.log(e.target.textContent);
     const invoiceData = invoices.find(
       (invoice) => invoice.id === e.target.textContent
     );
@@ -264,7 +263,6 @@ function App() {
     const newInvoices = invoices.filter((invoice) => invoice.id !== id);
     setInvoices(newInvoices);
     setIsDetailOpen(false);
-    console.log(id);
   };
   const onFilterChange = (e) => {
     setFilter(e.target.value);
