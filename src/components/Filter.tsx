@@ -6,7 +6,7 @@ import { filterOptions } from "../constants";
 export default function Filter({ filter, onChange }: FilterProps) {
   return (
     <select
-      className="px-4 py-2 bg-slate-100 capitalize"
+      className=" py-2 bg-slate-100 capitalize"
       value={filter}
       onChange={onChange}
     >

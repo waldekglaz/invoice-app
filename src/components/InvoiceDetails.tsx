@@ -1,9 +1,11 @@
-import React from "react";
+
 import GoBackBtn from "./GoBackBtn";
 import Card from "./Card";
 import StatusDisplay from "./StatusDisplay";
 import { dateGenerator } from "../utils/utils";
 import ActionBtn from "./ActionBtn";
+import { useParams } from "react-router-dom";
+
 
 interface InvoiceDetailsProps {
   status: string;
@@ -11,24 +13,31 @@ interface InvoiceDetailsProps {
   description: string;
 }
 
-export default function InvoiceDetails({
-  onClick,
-  status,
-  id,
-  description,
-  senderAddress,
-  createdAt,
-  paymentDue,
-  clientName,
-  clientEmail,
-  items,
-  total,
-  clientAddress,
-  onDelete,
-}: InvoiceDetailsProps) {
+export default function InvoiceDetails( props
+  // {
+  // onClick,
+  // status,
+  
+  // description,
+  // senderAddress,
+  // createdAt,
+  // paymentDue,
+  // clientName,
+  // clientEmail,
+  // items,
+  // total,
+  // clientAddress,
+  // onDelete,
+  // onEdit
+
+// }: InvoiceDetailsProps
+) {
+  const params = useParams()
+  console.log(params.invoiceId)
+  console.log(props)
   return (
     <>
-      <div className="px-6 py-[33px]">
+      {/* <div className="px-6 py-[33px]">
         <GoBackBtn onClick={onClick} />
         <Card className="">
           <div className="flex justify-between items-center">
@@ -117,12 +126,13 @@ export default function InvoiceDetails({
             </div>
           </div>
         </Card>
-      </div>
-      <div className="flex gap-2 bg-white px-6 py-5 absolute">
+      </div> */}
+      {/* <div className="flex gap-2 bg-white px-6 py-5 absolute">
         <ActionBtn btnText="edit" />
         <ActionBtn btnText="delete" onClick={() => onDelete(id)} />
-        <ActionBtn btnText="mark as paid" />
-      </div>
+        <ActionBtn btnText="mark as paid" onClick={()=> onEdit()}/>
+      </div> */}
+      {/* <p>{id}</p> */}
     </>
   );
 }

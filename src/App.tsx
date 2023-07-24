@@ -280,15 +280,19 @@ function App() {
     setInvoices([invoice, ...invoices]);
     setIsNewInvoiceClicked(false);
   };
+  const markPaidHandler = ()=>[
+    setInvoiceDetails({...invoiceDetails, status:'paid'})
+  ]
   return (
-    <div className="font-spartan bg-slate-100 h-screen">
-      <Header />
-      <main className="bg-slate-100 px-6">
+    <div className="font-spartan bg-slate-100  pb-4">
+      {/* <Header /> */}
+      
         {isDetailOpen && invoiceDetails && (
           <InvoiceDetails
             onClick={() => setIsDetailOpen(false)}
             {...invoiceDetails}
             onDelete={deleteInvoiceHandler}
+            onEdit={markPaidHandler}
           />
         )}
         {!isNewInvoiceClicked && !isDetailOpen && (
@@ -322,6 +326,7 @@ function App() {
               key={`invoice-${invoice.id}`}
               {...invoice}
               onClick={onCardClickHandler}
+              
             />
           ))}
         {isNewInvoiceClicked && (
